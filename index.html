@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Achi's creation – Hand Painted & Batik Artistry</title>
+
+<!-- ================================================================= -->
+<!--   ✦ WHATSAPP / FACEBOOK LINK PREVIEW (OPEN GRAPH METADATA) ✦    -->
+<!-- ================================================================= -->
+<meta property="og:title" content="Achi's creation – Hand Painted & Batik Artistry">
+<meta property="og:description" content="Natural colors, woven with tradition. Premium Batik, authentic hand-painted sarees, wearable arts & unique Sri Lankan handcrafts. Order your custom piece today!">
+<meta property="og:image" content="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Achi's creation">
+<meta name="description" content="Premium Batik, authentic hand-painted sarees, wearable arts & unique Sri Lankan handcrafts by Achi's creation.">
+<!-- ================================================================= -->
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   /* ===== CSS VARIABLES ===== */
@@ -13,17 +28,50 @@
     --sage: #7A8C6E; --teal: #3D7A78; --deep-teal: #2A5856; --chocolate: #4A2C1A;
     --ink: #1A0F08; --shadow: rgba(74,44,26,0.12); --shadow-md: rgba(74,44,26,0.2);
     --transition: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Bot Colors inside light mode */
+    --bot-bg: linear-gradient(135deg, var(--blush), var(--terracotta));
+    --bot-bubble-bg: white;
+    --bot-bubble-text: var(--chocolate);
+
+    /* Footer Light Mode Colors */
+    --footer-bg: #1A0F08;
+    --footer-text: rgba(255, 255, 255, 0.7);
+    --footer-heading: #FFFFFF;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ===== DARK THEME VARIABLES ===== */
+  [data-theme="dark"] {
+    --cream: #120A05; /* Rich dark chocolate ink background */
+    --warm-white: #1C120C;
+    --ink: #FDF8F0;
+    --chocolate: #E8A898;
+    --shadow: rgba(0,0,0,0.5);
+    --shadow-md: rgba(0,0,0,0.7);
+    
+    /* Glowing Neon / Vibrant adjustments for dark mode */
+    --terracotta: #E8846B;
+    
+    /* Bot Colors adjusted for dark theme visibility */
+    --bot-bg: linear-gradient(135deg, var(--saffron), var(--terracotta));
+    --bot-bubble-bg: #261A12;
+    --bot-bubble-text: #FFFCF7;
+
+    /* Footer Dark Mode Colors Fix */
+    --footer-bg: #090503; 
+    --footer-text: rgba(253, 248, 240, 0.65);
+    --footer-heading: #E8A898;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.4s var(--transition), color 0.4s var(--transition), border-color 0.4s var(--transition); }
   html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; overflow-x: hidden; position: relative; min-height: 100vh; }
 
   /* ===== PRELOADER ===== */
   #preloader {
     position: fixed; inset: 0;
     background: var(--warm-white);
-    z-index: 9999;
+    z-index: 99999;
     display: flex; align-items: center; justify-content: center;
     flex-direction: column;
     transition: opacity 0.8s ease, visibility 0.8s;
@@ -50,7 +98,11 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 18px 5%; display: flex; align-items: center; justify-content: space-between;
     background: rgba(253,248,240,0.85); backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(200,148,42,0.15); transition: padding 0.4s;
+    border-bottom: 1px solid rgba(200,148,42,0.15); transition: padding 0.4s, background-color 0.4s;
+  }
+  [data-theme="dark"] nav {
+    background: rgba(18,10,5,0.85);
+    border-bottom: 1px solid rgba(232,160,48,0.15);
   }
   nav.scrolled { padding: 12px 5%; box-shadow: 0 4px 30px var(--shadow); }
   .nav-logo {
@@ -59,7 +111,8 @@
   }
   .nav-logo span { color: var(--gold); font-style: italic; text-transform: lowercase; }
   
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-right-container { display: flex; align-items: center; gap: 20px; }
+  .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
   .nav-links a {
     font-size: 0.85rem; font-weight: 500; color: var(--chocolate);
     text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
@@ -72,6 +125,16 @@
   .nav-links a:hover { color: var(--terracotta); }
   .nav-links a:hover::after { width: 100%; }
 
+  /* ===== DARK MODE TOGGLE BUTTON ===== */
+  .theme-toggle-btn {
+    background: transparent; border: 1.5px solid rgba(74,44,26,0.2);
+    width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--terracotta); transition: all 0.3s;
+  }
+  [data-theme="dark"] .theme-toggle-btn { border-color: rgba(253,248,240,0.2); color: var(--saffron); }
+  .theme-toggle-btn:hover { transform: scale(1.1); box-shadow: 0 2px 10px var(--shadow); }
+
   .nav-cta {
     background: var(--terracotta); color: white !important; padding: 10px 22px;
     border-radius: 50px; font-size: 0.82rem !important; font-weight: 500 !important;
@@ -82,8 +145,8 @@
   .nav-cta:hover { background: var(--chocolate) !important; transform: translateY(-2px) !important; color: white !important; }
 
   /* HAMBURGER MENU */
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 24px; height: 2px; background: var(--chocolate); border-radius: 2px; transition: 0.3s; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 102; }
+  .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.3s; }
   .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
@@ -102,6 +165,7 @@
     position: absolute; inset: 0; opacity: 0.6;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C4715A' fill-opacity='0.04'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
+  [data-theme="dark"] .hero-pattern { opacity: 0.15; }
   .hero-content { position: relative; z-index: 2; max-width: 620px; }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
@@ -144,12 +208,23 @@
 
   /* ===== DESIGNS GRID ===== */
   #designs { padding: 100px 5%; background: var(--warm-white); }
-  .filter-tabs { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; justify-content:center; }
+  
+  .filter-tabs { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+    margin-bottom: 48px; 
+    justify-content: center; 
+    max-width: 800px; 
+    margin-left: auto; 
+    margin-right: auto;
+  }
   .filter-btn {
     padding: 10px 24px; border-radius: 50px; font-size: 0.82rem; font-weight: 500;
     cursor: pointer; border: 1.5px solid rgba(74,44,26,0.2); background: transparent;
     color: var(--chocolate); transition: all 0.3s; font-family: 'DM Sans';
   }
+  [data-theme="dark"] .filter-btn { border-color: rgba(253,248,240,0.2); }
   .filter-btn.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
   .designs-masonry { columns: 4; column-gap: 20px; min-height: 300px; }
   
@@ -172,30 +247,154 @@
   .whatsapp-btn {
     display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white;
     padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; text-decoration: none; width: fit-content;
+    cursor: pointer; border: none;
   }
 
   .loading-text { text-align: center; font-size: 1.2rem; color: var(--terracotta); font-family: 'Playfair Display'; grid-column: 1 / -1; }
 
-  /* ===== FOOTER ===== */
-  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 60px 5% 30px; }
+  /* ===== ORDER & TRACKING MODAL POPUP ===== */
+  .order-modal {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(26, 15, 8, 0.6); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: all 0.4s ease; padding: 20px;
+  }
+  .order-modal.open { opacity: 1; visibility: visible; }
+  .order-modal-content {
+    background: var(--warm-white); color: var(--ink);
+    width: 100%; max-width: 450px; border-radius: 24px; padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative;
+    transform: translateY(-3px); transition: transform 0.4s var(--transition);
+    border: 1px solid rgba(200,148,42,0.2);
+  }
+  .order-modal.open .order-modal-content { transform: translateY(0); }
+  .order-modal-close {
+    position: absolute; top: 20px; right: 20px; background: transparent; border: none;
+    font-size: 1.4rem; cursor: pointer; color: var(--terracotta); transition: transform 0.3s;
+  }
+  .order-modal-close:hover { transform: scale(1.2); }
+  .order-modal h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; color: var(--terracotta); }
+  .order-modal p { font-size: 0.85rem; color: var(--chocolate); margin-bottom: 20px; opacity: 0.8; }
+  
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.8; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid rgba(74,44,26,0.15);
+    background: var(--cream); color: var(--ink); font-family: inherit; font-size: 0.9rem; transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--terracotta); }
+  
+  .order-submit-btn {
+    width: 100%; background: var(--terracotta); color: white; padding: 14px; border: none;
+    border-radius: 50px; font-weight: 500; font-size: 0.95rem; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(196,113,90,0.3); transition: all 0.3s; margin-top: 10px;
+  }
+  .order-submit-btn:hover { background: var(--chocolate); transform: translateY(-2px); }
+
+  /* ===== TRACKING SUCCESS POPUP ===== */
+  .success-view { text-align: center; display: none; }
+  .success-icon { font-size: 3.5rem; margin-bottom: 15px; display: inline-block; animation: breathe 2s infinite; }
+  .tracking-box {
+    background: rgba(232,160,48,0.1); border: 1px dashed var(--gold);
+    padding: 15px; border-radius: 12px; font-family: monospace; font-size: 1.2rem;
+    font-weight: bold; color: var(--deep-gold); margin: 20px 0; letter-spacing: 1px;
+  }
+
+  /* ===== FIXED FOOTER ===== */
+  footer { background: var(--footer-bg); color: var(--footer-text); padding: 60px 5% 30px; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
   .footer-brand .nav-logo { color: var(--rose); font-size: 1.8rem; margin-bottom: 16px; display: block; }
-  .footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 260px; }
-  .footer-col h4 { font-family: 'Playfair Display', serif; color: white; font-size: 1rem; margin-bottom: 20px; }
+  .footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 260px; color: var(--footer-text); }
+  .footer-col h4 { font-family: 'Playfair Display', serif; color: var(--footer-heading); font-size: 1rem; margin-bottom: 20px; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 10px; }
-  .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.86rem; transition: color 0.3s; }
+  .footer-col a { color: var(--footer-text); text-decoration: none; font-size: 0.86rem; transition: color 0.3s; }
   .footer-col a:hover { color: var(--rose); }
   .social-links { display: flex; gap: 12px; margin-top: 24px; }
   .social-btn {
     width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.08);
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.7); text-decoration: none; font-size: 1rem; transition: all 0.3s;
+    color: var(--footer-text); text-decoration: none; font-size: 1rem; transition: all 0.3s;
   }
   .social-btn:hover { background: var(--terracotta); color: white; transform: translateY(-3px); }
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
     display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem;
+    color: var(--footer-text);
+  }
+
+  /* ===== MOVABLE & SMALLER CUTE BOT UI ===== */
+  .bot-container { 
+    position: fixed; bottom: 30px; left: 25px; 
+    display: flex; flex-direction: column; align-items: flex-start; 
+    z-index: 9999; cursor: grab; user-select: none; touch-action: none;
+  }
+  .bot-container:active { cursor: grabbing; }
+  
+  .bot-bubble { 
+    background: var(--bot-bubble-bg); padding: 10px 14px; border-radius: 14px; font-size: 0.78rem; 
+    font-weight: 500; color: var(--bot-bubble-text); box-shadow: 0 6px 20px rgba(0,0,0,0.15); 
+    margin-bottom: 6px; width: 140px; text-align: center; position: relative; 
+    border: 1px solid rgba(196,113,90,0.2); pointer-events: none;
+    opacity: 1; visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .bot-bubble.hide-bubble {
+    animation: blinkHide 0.8s ease forwards;
+  }
+  .bot-bubble::after { content: ''; position: absolute; bottom: -8px; left: 20px; border-width: 8px 8px 0; border-style: solid; border-color: var(--bot-bubble-bg) transparent; display: block; width: 0; transform: scaleX(-1); }
+
+  @keyframes blinkHide {
+    0% { opacity: 1; transform: scale(1); }
+    25% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+    75% { opacity: 0.2; }
+    100% { opacity: 0; visibility: hidden; transform: scale(0.9); }
+  }
+
+  .cute-bot { 
+    width: 52px; height: 52px; background: var(--bot-bg); 
+    border-radius: 50% 50% 45% 45%; position: relative; box-shadow: 0 6px 20px var(--shadow); 
+    display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, background 0.4s;
+    animation: floatAndWobble 5s ease-in-out infinite;
+  }
+  .bot-hat { position: absolute; top: -6px; left: 10px; width: 32px; height: 14px; background: #4A2C1A; border-radius: 20px 20px 5px 5px; transform: rotate(-12deg); }
+  [data-theme="dark"] .bot-hat { background: #1A0F08; }
+  .bot-hat::after { content: ''; position: absolute; top: -3px; left: 13px; width: 5px; height: 4px; background: inherit; border-radius: 50%; }
+  .bot-face { width: 100%; height: 100%; position: relative; pointer-events: none; }
+  .bot-eyes { display: flex; justify-content: space-between; width: 26px; position: absolute; top: 22px; left: 13px; }
+  .bot-eye { width: 5.5px; height: 5.5px; background: #1A0F08; border-radius: 50%; }
+  [data-theme="dark"] .bot-eye { background: #FFFCF7; }
+  .bot-cheeks { display: flex; justify-content: space-between; width: 36px; position: absolute; top: 26px; left: 8px; opacity: 0.6; }
+  .bot-cheek { width: 6px; height: 4px; background: #ff7675; border-radius: 50%; filter: blur(0.5px); }
+  .paint-badge { position: absolute; bottom: 5px; right: 6px; font-size: 0.65rem; transform: rotate(15deg); }
+
+  .cute-bot.happy { animation: jumpBot 0.5s ease 2; }
+  .cute-bot.happy .bot-eye { height: 4px; background: transparent; border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: rotate(45deg); border-radius: 0; }
+
+  @keyframes floatAndWobble {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(-3deg); }
+    50% { transform: translateY(2px) rotate(2deg); }
+    75% { transform: translateY(-4px) rotate(-1deg); }
+  }
+  @keyframes floatBubble { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  @keyframes jumpBot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* ===== GEMINI GEM STAR CLICK SPARKLE STYLES ===== */
+  .gemini-star {
+    position: absolute; 
+    width: 14px; height: 14px; 
+    background: var(--terracotta); pointer-events: none; z-index: 99999;
+    clip-path: polygon(50% 0%, 63% 37%, 100% 50%, 63% 63%, 50% 100%, 37% 63%, 0% 50%, 37% 37%);
+    transform: translate(-50%, -50%) scale(0);
+    animation: starBlink 4s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+  }
+  @keyframes starBlink {
+    0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+    15% { transform: translate(-50%, -50%) scale(1.1) rotate(45deg); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1) rotate(90deg); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(0.2) rotate(180deg); opacity: 0; } 
   }
 
   /* ===== MOBILE RESPONSIVE ===== */
@@ -222,15 +421,33 @@
   <div class="pre-line"></div>
 </div>
 
+<div class="bot-container" id="draggableBotContainer">
+  <div class="bot-bubble" id="userBotBubble">Hi! Drag me anywhere or click screen for magic! ✨🎨</div>
+  <div class="cute-bot" id="userArtyBot">
+    <div class="bot-hat"></div>
+    <div class="bot-face">
+      <div class="bot-cheeks"><div class="bot-cheek"></div><div class="bot-cheek"></div></div>
+      <div class="bot-eyes"><div class="bot-eye"></div><div class="bot-eye"></div></div>
+      <div class="paint-badge">🎨</div>
+    </div>
+  </div>
+</div>
+
 <nav id="navbar">
   <a href="#" class="nav-logo">Achi's<span>creation</span></a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#designs">Designs</a></li>
-    <li><a href="https://wa.me/94744245384?text=Hello!%20I%20want%20to%20place%20an%20order." target="_blank" class="nav-cta">Contact Us ✦</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
+  <div class="nav-right-container">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#designs">Designs</a></li>
+      <li><a href="#" onclick="openTrackModal(event)">Track Order 🔍</a></li>
+      <li>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">🌙</button>
+      </li>
+      <li><a href="https://wa.me/94754245384?text=Hello!%20I%20want%20to%20place%20an%20order." target="_blank" class="nav-cta">Contact Us ✦</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
@@ -239,14 +456,14 @@
   <div class="hero-pattern"></div>
   <div class="hero-content">
     <div class="hero-tag">Handcrafted with Love</div>
-    <h1>Art That Lives<br>On Your <em>Saree</em><br><span class="line2">& Clothes</span></h1>
+    <h1>Art That Lives<br>On Your <em>Saree</em><br><span class="line2">& Handcraft</span></h1>
     <p>Each piece is a canvas — painted with natural colors, woven with tradition, and crafted with the soul of authentic Sri Lankan artistry. Batik, hand-paint, and one-of-a-kind wearable art.</p>
     <div class="hero-btns"><a href="#designs" class="btn-primary">✦ Explore Designs</a></div>
   </div>
   <div class="hero-visuals">
     <div class="hero-card"><div class="color-card">Painted Saree</div></div>
     <div class="hero-card"><div class="color-card">Batik Art</div></div>
-    <div class="hero-card"><div class="color-card">Kurta Art</div></div>
+    <div class="hero-card"><div class="color-card">Handcraft</div></div>
     <div class="hero-card"><div class="color-card">Dupatta</div></div>
   </div>
 </section>
@@ -260,13 +477,101 @@
     <button class="filter-btn active" onclick="filterDesigns('all', this)">All</button>
     <button class="filter-btn" onclick="filterDesigns('saree', this)">Sarees</button>
     <button class="filter-btn" onclick="filterDesigns('batik', this)">Batik</button>
-    <button class="filter-btn" onclick="filterDesigns('kurta', this)">Kurtas</button>
+    <button class="filter-btn" onclick="filterDesigns('kurta', this)">Handcraft</button>
+    <button class="filter-btn" onclick="filterDesigns('pencil', this)">Pencil Art</button>
+    <button class="filter-btn" onclick="filterDesigns('styrofoam', this)">Styrofoam Art</button>
+    <button class="filter-btn" onclick="filterDesigns('wallart', this)">Wall Art</button>
   </div>
 
   <div class="designs-masonry" id="designsGrid">
     <div class="loading-text">Loading designs from Database...</div>
   </div>
 </section>
+
+<!-- ===== PLACE ORDER MODAL ===== -->
+<div class="order-modal" id="orderModal">
+  <div class="order-modal-content">
+    <button class="order-modal-close" onclick="closeOrderModal()">✕</button>
+    
+    <div id="formView">
+      <h3>Place Your Order</h3>
+      <p>Fill in your details to generate your tracking code and send the order details via WhatsApp.</p>
+      
+      <form id="whatsappOrderForm" onsubmit="handleOrderSubmit(event)">
+        <div class="form-group">
+          <label>Item Name * (You can change if blank)</label>
+          <input type="text" id="modalItemName" required placeholder="Enter item name manually">
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input type="text" id="modalItemPrice" readonly>
+        </div>
+        
+        <div class="form-group" id="sizeGroupContainer">
+          <label id="sizeFieldLabel">Select Size *</label>
+          <select id="modalItemSize" required>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label>Your Full Name *</label>
+          <input type="text" id="customerName" required placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="customerPhone" required placeholder="07XXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <textarea id="customerAddress" rows="3" required placeholder="Enter your full shipping address"></textarea>
+        </div>
+        <button type="submit" class="order-submit-btn">Confirm & Order via WhatsApp ✦</button>
+      </form>
+    </div>
+
+    <div id="successView" class="success-view">
+      <span class="success-icon">🎉</span>
+      <h3>Order Details Ready!</h3>
+      <p>Your order tracking code has been generated. We are now redirecting you to WhatsApp to complete the order...</p>
+      <div class="tracking-box" id="trackingCodeDisplay">ACHI-2026-0000</div>
+      <p style="font-size: 0.8rem; color: var(--terracotta);">Please do not close the WhatsApp chat until you send the message.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== TRACK ORDER MODAL ===== -->
+<div class="order-modal" id="trackModal">
+  <div class="order-modal-content">
+    <button class="order-modal-close" onclick="closeTrackModal()">✕</button>
+    
+    <div id="trackFormView">
+      <h3>Track Your Order</h3>
+      <p>ඔබගේ Order එක දානකොට ලැබුණු Tracking Code එක මෙහි ඇතුලත් කරන්න.</p>
+      
+      <form id="trackOrderForm" onsubmit="handleTrackSubmit(event)">
+        <div class="form-group">
+          <label>Tracking Code *</label>
+          <input type="text" id="trackingInput" required placeholder="e.g. ACHI-2026-1234">
+        </div>
+        <button type="submit" class="order-submit-btn">Check Status 🔍</button>
+      </form>
+    </div>
+
+    <div id="trackResultView" style="display: none; text-align: center;">
+      <span class="success-icon" style="font-size: 3rem; margin-bottom: 10px; display: inline-block;">📦</span>
+      <h3 style="color: var(--terracotta); margin-bottom: 15px;">Order Status</h3>
+      <div class="tracking-box" id="trackedCodeDisplay"></div>
+      
+      <div id="trackStatusMsg" style="padding: 15px; border-radius: 12px; font-weight: 500; margin-top: 15px; border: 1.5px solid transparent; transition: all 0.3s;">
+        Searching Order Database... ⏳
+      </div>
+      
+      <button class="order-submit-btn" style="margin-top: 20px; background: var(--sage);" onclick="resetTrackModal()">Track Another Order</button>
+    </div>
+
+  </div>
+</div>
 
 <footer>
   <div class="footer-grid">
@@ -276,7 +581,8 @@
       <div class="social-links">
         <a class="social-btn" href="#" title="Instagram">📸</a>
         <a class="social-btn" href="#" title="Facebook">📘</a>
-        <a class="social-btn" href="https://wa.me/94744245384" target="_blank" title="WhatsApp">💬</a>
+        <a class="social-btn" href="https://www.tiktok.com/@achijayasinghe1?_r=1&_t=ZS-96R8bMqS0oP" target="_blank" title="TikTok">🎵</a>
+        <a class="social-btn" href="https://wa.me/94754245384" target="_blank" title="WhatsApp">💬</a>
       </div>
     </div>
     <div class="footer-col">
@@ -286,29 +592,27 @@
     <div class="footer-col">
       <h4>Get In Touch</h4>
       <ul>
-        <li><a href="https://wa.me/94744245384" target="_blank">💬 WhatsApp Us</a></li>
+        <li><a href="https://wa.me/94754245384" target="_blank">💬 WhatsApp Us</a></li>
         <li><a href="mailto:jayasingheachintha4@gmail.com">📧 jayasingheachintha4@gmail.com</a></li>
         <li><a href="#">📍 Warakapola, Sri Lanka</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Achi's creation. All rights reserved. Made with ❤️ & Art.</span>
+    <span>© 2026 Achi's creation. All rights reserved. Made with ZENTECH ELECTRONICS ART BY THARUSHA.</span>
     <span style="color:var(--rose);">✦ Every piece is unique ✦</span>
   </div>
 </footer>
 
 <script>
-  // --- PRELOADER LOGIC ---
+  // --- PRELOADER ANIMATION CONTROLLER ---
   window.addEventListener('load', () => {
-    // Normal delay: hides after 1.5 seconds giving time to see the animation
     setTimeout(() => {
       const loader = document.getElementById('preloader');
       if(loader) loader.classList.add('hide');
     }, 1500);
   });
 
-  // Failsafe: Forces the loader to disappear after 4 seconds even if Firebase gets stuck
   setTimeout(() => {
     const loader = document.getElementById('preloader');
     if(loader && !loader.classList.contains('hide')) loader.classList.add('hide');
@@ -327,23 +631,230 @@
     if(nav) nav.classList.toggle('scrolled', window.scrollY > 50);
   });
 
+  // --- INTERACTIVE VISITOR BOT TEXT CONTROLLER & AUTO HIDE (7 SECONDS) ---
+  const userBotBubble = document.getElementById('userBotBubble');
+  const userArtyBot = document.getElementById('userArtyBot');
+  const botContainer = document.getElementById('draggableBotContainer');
+  let bubbleTimer = null;
+
+  function showBotBubble(text) {
+    if (bubbleTimer) clearTimeout(bubbleTimer);
+    
+    userBotBubble.innerText = text;
+    userBotBubble.classList.remove('hide-bubble');
+    userBotBubble.style.opacity = '1';
+    userBotBubble.style.visibility = 'visible';
+
+    bubbleTimer = setTimeout(() => {
+      userBotBubble.classList.add('hide-bubble');
+    }, 7000);
+  }
+
+  setTimeout(() => {
+    showBotBubble("Hi! Drag me anywhere or click screen for magic! ✨🎨");
+  }, 2000);
+
+  // --- DARK / LIGHT THEME TOGGLE LOGIC ---
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggleBtn.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    let newTheme = 'light';
+    
+    if (currentTheme === 'light') {
+      newTheme = 'dark';
+      themeToggleBtn.innerText = '☀️';
+      showBotBubble("Embracing the night vibes! The colors pop beautifully now! 🌌🎨");
+    } else {
+      themeToggleBtn.innerText = '🌙';
+      showBotBubble("Back to the bright canvas! Let's build art! ☀️✨");
+    }
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    userArtyBot.classList.add('happy');
+    setTimeout(() => { userArtyBot.classList.remove('happy'); }, 1000);
+  });
+
+  // --- PLACE ORDER MODAL LOGIC ---
+  function initModalTriggers() {
+    document.addEventListener('click', function(e) {
+      const button = e.target.closest('.trigger-order-btn');
+      if (!button) return;
+
+      const itemName = button.getAttribute('data-name') || '';
+      const itemPrice = button.getAttribute('data-price') || 'N/A';
+      const cleanCat = button.getAttribute('data-category') || 'all';
+
+      document.getElementById('modalItemName').value = itemName;
+      
+      if(!itemPrice || itemPrice === '0' || itemPrice === 'undefined' || itemPrice === 'N/A') {
+        document.getElementById('modalItemPrice').value = "Pending (Depends on Size)";
+      } else {
+        document.getElementById('modalItemPrice').value = "Rs. " + itemPrice;
+      }
+      
+      const sizeSelect = document.getElementById('modalItemSize');
+      const sizeLabel = document.getElementById('sizeFieldLabel');
+      sizeSelect.innerHTML = ''; 
+
+      if(cleanCat.includes('pencil') || cleanCat.includes('styrofoam') || cleanCat.includes('wall')) {
+        sizeLabel.innerText = "Select Art Size *";
+        sizeSelect.innerHTML = `
+          <option value="A4 Size">A4 Size Canvas / Paper</option>
+          <option value="A3 Size">A3 Size Canvas / Paper</option>
+          <option value="A2 Size">A2 Size Canvas / Paper</option>
+          <option value="12x18 Inches">12 x 18 Inches Frame</option>
+          <option value="Custom Size">Custom Size (Discuss on WhatsApp)</option>
+        `;
+      } else if(cleanCat.includes('saree') || cleanCat.includes('kurta') || cleanCat.includes('batik')) {
+        sizeLabel.innerText = "Select Clothing Size *";
+        sizeSelect.innerHTML = `
+          <option value="Standard Free Size">Standard Free Size</option>
+          <option value="Size S">Small (S)</option>
+          <option value="Size M">Medium (M)</option>
+          <option value="Size L">Large (L)</option>
+          <option value="Size XL">Extra Large (XL)</option>
+          <option value="Size XXL">Double XL (XXL)</option>
+        `;
+      } else {
+        sizeLabel.innerText = "Select Preference *";
+        sizeSelect.innerHTML = `
+          <option value="Standard Size">Standard Custom Design</option>
+          <option value="Custom Option">Custom Requirements</option>
+        `;
+      }
+      
+      document.getElementById('formView').style.display = 'block';
+      document.getElementById('successView').style.display = 'none';
+      document.getElementById('whatsappOrderForm').reset();
+      document.getElementById('orderModal').classList.add('open');
+    });
+  }
+
+  function closeOrderModal() {
+    document.getElementById('orderModal').classList.remove('open');
+  }
+
+  // --- INTERACTIVE VISITOR BOT & DRAG LOGIC ---
+  const visitorQuotes = [
+    "Need custom changes? Tap 'Order Now' to WhatsApp us directly! 💬",
+    "Everything you see here is 100% handmade with authentic passion! ❤️",
+    "We ship island-wide safely packed to your front door! 🚚",
+    "Tap different filter buttons above to check our unique sub-collections! 🎨",
+    "Each thread and color gradient here tells an artistic story! ✨",
+    "Wheee! Thanks for moving me around! You are awesome! 🥰"
+  ];
+
+  let isDragging = false;
+  let startX, startY;
+
+  botContainer.addEventListener('mousedown', dragStart);
+  botContainer.addEventListener('touchstart', dragStart, { passive: true });
+
+  window.addEventListener('mousemove', dragMove);
+  window.addEventListener('touchmove', dragMove, { passive: false });
+
+  window.addEventListener('mouseup', dragEnd);
+  window.addEventListener('touchend', dragEnd);
+
+  function dragStart(e) {
+    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+    
+    isDragging = true;
+    userArtyBot.style.animation = 'none';
+    
+    startX = clientX - botContainer.offsetLeft;
+    startY = clientY - botContainer.offsetTop;
+  }
+
+  function dragMove(e) {
+    if (!isDragging) return;
+    if(e.type === 'touchmove') e.preventDefault();
+
+    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+    let x = clientX - startX;
+    let y = clientY - startY;
+
+    const padding = 10;
+    x = Math.max(padding, Math.min(x, window.innerWidth - botContainer.offsetWidth - padding));
+    y = Math.max(padding, Math.min(y, window.innerHeight - botContainer.offsetHeight - padding));
+
+    botContainer.style.left = x + 'px';
+    botContainer.style.top = y + 'px';
+    botContainer.style.bottom = 'auto';
+  }
+
+  function dragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    userArtyBot.style.animation = 'floatAndWobble 5s ease-in-out infinite';
+    pokeUserBot();
+  }
+
+  userArtyBot.addEventListener('click', () => {
+    if(!isDragging) pokeUserBot();
+  });
+
+  function pokeUserBot() {
+    userArtyBot.classList.add('happy');
+    const randomIdx = Math.floor(Math.random() * visitorQuotes.length);
+    showBotBubble(visitorQuotes[randomIdx]);
+    setTimeout(() => { userArtyBot.classList.remove('happy'); }, 1000);
+  }
+
+  // --- SPARKLING STAR CLICK EFFECT LOGIC ---
+  window.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('#draggableBotContainer') || e.target.closest('.order-modal-content')) return;
+
+    const star = document.createElement('div');
+    star.className = 'gemini-star';
+    star.style.left = e.pageX + 'px';
+    star.style.top = e.pageY + 'px';
+    
+    document.body.appendChild(star);
+    
+    setTimeout(() => { star.remove(); }, 4000);
+  });
+
+  // --- FILTER FUNCTION WITH BOT REACTION ---
   window.filterDesigns = function(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
+    const catNames = { all: "all creations", saree: "gorgeous Sarees", batik: "traditional Batik", kurta: "exclusive Handcraft products", pencil: "realistic Pencil portraits", styrofoam: "creative Styrofoam items", wallart: "amazing Wall Art" };
+    showBotBubble(`Filtering for our ${catNames[cat] || cat}! Hope you love them! 😍`);
+    
     document.querySelectorAll('.design-card').forEach(card => {
-      const cats = card.getAttribute('data-cat') ? card.getAttribute('data-cat').toLowerCase() : '';
-      if (cat === 'all' || cats.includes(cat)) {
+      const cardCat = card.getAttribute('data-cat') ? card.getAttribute('data-cat').toLowerCase().trim() : '';
+      const filterCat = cat.toLowerCase().trim();
+      
+      if (filterCat === 'all' || cardCat === filterCat || cardCat.includes(filterCat)) {
         card.style.display = 'block';
       } else {
         card.style.display = 'none';
       }
     });
   }
+
+  window.openTrackModal = null;
+  window.closeTrackModal = null;
+  window.resetTrackModal = null;
+  window.handleTrackSubmit = null;
+  window.handleOrderSubmit = null;
 </script>
 
+<!-- ===== FIREBASE LIVE CONNECTIVITY INJECTOR MODULE ===== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, orderBy, query, doc, setDoc, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCN--jld9RjWhTCanIlqvHd_V7PuSGR_Ic",
@@ -357,6 +868,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // --- LOAD DESIGNS FROM DATABASE ---
   async function loadDesigns() {
     const grid = document.getElementById('designsGrid');
     try {
@@ -374,10 +886,17 @@
         const data = doc.data();
         if (data.isHidden) return; 
 
-        const waMsg = encodeURIComponent(`Hello! I'm interested in the ${data.name}.`);
+        const rawPrice = (data.price && data.price !== 0 && data.price !== '0') ? data.price : 'N/A';
+        const cleanCategory = data.category ? data.category.toLowerCase().trim() : 'all';
+        const itemName = data.name ? data.name : 'Custom Handcraft';
+
+        let priceDisplay = `Rs. ${rawPrice}`;
+        if(rawPrice === 'N/A') {
+          priceDisplay = 'Price: On Size';
+        }
         
         let stockBadge = '';
-        let btnHTML = `<a class="whatsapp-btn" href="https://wa.me/94744245384?text=${waMsg}" target="_blank">💬 Order Now</a>`;
+        let btnHTML = `<button class="whatsapp-btn trigger-order-btn" data-name="${itemName}" data-price="${rawPrice}" data-category="${cleanCategory}">💬 Order Now</button>`;
         let cardStyle = '';
 
         if (data.inStock === false) {
@@ -387,14 +906,14 @@
         }
         
         const cardHTML = `
-          <div class="design-card" data-cat="${data.category}" style="${cardStyle}">
+          <div class="design-card" data-cat="${cleanCategory}" style="${cardStyle}">
             ${stockBadge}
             <div class="design-img-container">
-              <img src="${data.imageUrl}" alt="${data.name}">
+              <img src="${data.imageUrl}" alt="${itemName}">
             </div>
             <div class="design-overlay">
-              <div class="design-name">${data.name}</div>
-              <div class="design-price">Rs. ${data.price}</div>
+              <div class="design-name">${itemName}</div>
+              <div class="design-price">${priceDisplay}</div>
               ${btnHTML}
             </div>
           </div>
@@ -409,8 +928,168 @@
     }
   }
 
+  // --- SAVE ORDERS INTERNALLY INTO FIRESTORE ---
+  window.handleOrderSubmit = async function(event) {
+    event.preventDefault();
+
+    const item = document.getElementById('modalItemName').value;
+    const price = document.getElementById('modalItemPrice').value;
+    const size = document.getElementById('modalItemSize').value;
+    const name = document.getElementById('customerName').value;
+    const phone = document.getElementById('customerPhone').value;
+    const address = document.getElementById('customerAddress').value;
+
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    const trackingCode = `ACHI-2026-${randomDigits}`;
+
+    const submitBtn = event.target.querySelector('.order-submit-btn');
+    const oldBtnText = submitBtn.innerText;
+    submitBtn.innerText = "Saving Order Details... ⏳";
+    submitBtn.disabled = true;
+
+    try {
+      await setDoc(doc(db, "orders", trackingCode), {
+        trackingCode: trackingCode,
+        itemName: item || 'Not Specified',
+        size: size,
+        price: price,
+        customerName: name,
+        phone: phone,
+        address: address,
+        status: "Pending", 
+        createdAt: new Date().toISOString()
+      });
+      console.log("Order logged into live Database securely:", trackingCode);
+    } catch (err) {
+      console.error("Database storage failed:", err);
+    }
+
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+    document.getElementById('trackingCodeDisplay').innerText = trackingCode;
+
+    const whatsappMessage = `*✦ NEW ORDER RECEIVED ✦*\n\n` +
+                            `*Order Tracking Code:* ${trackingCode}\n` +
+                            `---------------------------\n` +
+                            `*Item Name:* ${item ? item : 'Not Specified'}\n` +
+                            `*Selected Size:* ${size}\n` +
+                            `*Price Status:* ${price}\n` +
+                            `---------------------------\n` +
+                            `*Customer Name:* ${name}\n` +
+                            `*Phone Number:* ${phone}\n` +
+                            `*Shipping Address:* ${address}\n\n` +
+                            `Thank you for ordering from Achi's Creation! ❤️🎨`;
+
+    const encodedMsg = encodeURIComponent(whatsappMessage);
+    const whatsappURL = `https://wa.me/94754245384?text=${encodedMsg}`;
+
+    setTimeout(() => {
+      window.open(whatsappURL, '_blank');
+      submitBtn.innerText = oldBtnText;
+      submitBtn.disabled = false;
+    }, 2500);
+  };
+
+  // --- DYNAMIC ORDER STATUS TRACKER ---
+  window.openTrackModal = function(e) {
+    if (e) e.preventDefault();
+    document.getElementById('trackModal').classList.add('open');
+    window.resetTrackModal();
+    showBotBubble("ඔබගේ Tracking code එක ඇතුලත් කරන්න! මම Database එකෙන් හොයලා බලන්නම්. 📦✨");
+  };
+
+  window.closeTrackModal = function() {
+    document.getElementById('trackModal').classList.remove('open');
+  };
+
+  window.resetTrackModal = function() {
+    document.getElementById('trackFormView').style.display = 'block';
+    document.getElementById('trackResultView').style.display = 'none';
+    document.getElementById('trackOrderForm').reset();
+  };
+
+  window.handleTrackSubmit = async function(event) {
+    event.preventDefault();
+    const code = document.getElementById('trackingInput').value.trim().toUpperCase();
+    
+    if (!code) return;
+
+    document.getElementById('trackFormView').style.display = 'none';
+    document.getElementById('trackResultView').style.display = 'block';
+    document.getElementById('trackedCodeDisplay').innerText = code;
+    
+    const statusMsg = document.getElementById('trackStatusMsg');
+    statusMsg.innerHTML = "Searching Live Database... ⏳";
+    statusMsg.style.borderColor = "var(--saffron)";
+    statusMsg.style.color = "var(--deep-gold)";
+    statusMsg.style.background = "rgba(232,160,48,0.1)";
+
+    try {
+      const docSnap = await getDocs(query(collection(db, "orders"), where("trackingCode", "==", code)));
+      let orderData = null;
+
+      if (!docSnap.empty) {
+        docSnap.forEach((d) => { orderData = d.data(); });
+      }
+
+      if (orderData) {
+        const dbStatus = orderData.status ? orderData.status.toLowerCase().trim() : 'pending';
+        let displayHTML = '';
+        
+        if (dbStatus === 'pending') {
+          displayHTML = "Status: <b>Order Pending ⏳</b><br><span style='font-size:0.85rem; opacity:0.9; margin-top:8px; display:block;'>ඔබගේ ඇණවුම අප වෙත ලැබී ඇත. ඉක්මනින්ම නිර්මාණය කිරීමේ කටයුතු ආරම්භ කරනු ඇත.</span>";
+          statusMsg.style.borderColor = "var(--saffron)";
+          statusMsg.style.color = "var(--deep-gold)";
+          statusMsg.style.background = "rgba(232,160,48,0.1)";
+          showBotBubble("ඔබගේ ඇණවුම ලැබී තිබෙනවා, ඉක්මනින්ම නිර්මාණය කිරීම් අරඹනවා! ⏳🎨");
+        } 
+        else if (dbStatus === 'designing' || dbStatus === 'processing' || dbStatus === 'සාදන ගමන්') {
+          displayHTML = "Status: <b>Designing & Crafting 🎨</b><br><span style='font-size:0.85rem; opacity:0.9; margin-top:8px; display:block;'>ඔබේ ඇණවුම මේ දිනවල ඉතා ආදරයෙන් අතින් හැඩගන්වමින් (Handcrafting/Painting) පවතී.</span>";
+          statusMsg.style.borderColor = "var(--rose)";
+          statusMsg.style.color = "var(--chocolate)";
+          statusMsg.style.background = "rgba(232,168,152,0.15)";
+          showBotBubble("Wooo! ඔයාගේ ඇණවුම අපේ කලාකරුවන් අතින් ලස්සනට හැඩවෙන ගමන් තියෙන්නේ! 🥰✨");
+        } 
+        else if (dbStatus === 'shipped' || dbStatus === 'dispatched' || dbStatus === 'පිටත් කර ඇත') {
+          displayHTML = "Status: <b>Order Shipped 🚚</b><br><span style='font-size:0.85rem; opacity:0.9; margin-top:8px; display:block;'>ඔබගේ පාර්සලය කුරියර් සේවාව වෙත bhara දී ඇත. දින 2-3ක් ඇතුලත ඔබට ලැබෙනු ඇත.</span>";
+          statusMsg.style.borderColor = "var(--teal)";
+          statusMsg.style.color = "var(--deep-teal)";
+          statusMsg.style.background = "rgba(61,122,120,0.1)";
+          showBotBubble("ප්‍රීතිමත් ආරංචියක්! ඔයාගේ බඩු ටික කුරියර් එකට බාර දුන්නා, ළඟදීම ගෙදරටම එයි! 🚚💨");
+        } 
+        else if (dbStatus === 'delivered' || dbStatus === 'completed' || dbStatus === 'භාර දී ඇත') {
+          displayHTML = "Status: <b>Delivered ✅</b><br><span style='font-size:0.85rem; opacity:0.9; margin-top:8px; display:block;'>ඇණවුම ඔබට සාර්ථකව භාර දී අවසන්. Achi's Creation සමඟ සම්බන්ධ වූවාට ස්තූතියි! ❤️</span>";
+          statusMsg.style.borderColor = "var(--sage)";
+          statusMsg.style.color = "var(--deep-teal)";
+          statusMsg.style.background = "rgba(122,140,110,0.15)";
+          showBotBubble("ඇණවුම ඔයාට ලැබිලා තියෙන්නේ! බඩු ලස්සනයි නම් අපිට Photo එකක් එවන්නකෝ! 😍❤️");
+        } 
+        else {
+          displayHTML = `Status: <b>${orderData.status} ✨</b><br><span style='font-size:0.85rem; opacity:0.9; margin-top:8px; display:block;'>Item: ${orderData.itemName || 'Handcraft Product'}</span>`;
+          statusMsg.style.borderColor = "var(--gold)";
+          statusMsg.style.color = "var(--deep-gold)";
+          statusMsg.style.background = "rgba(200,148,42,0.1)";
+          showBotBubble(`ඔබගේ Order එකේ වත්මන් තත්ත්වය: ${orderData.status} 👍`);
+        }
+        
+        statusMsg.innerHTML = displayHTML;
+      } else {
+        statusMsg.innerHTML = "Status: <b>Order Not Found ❌</b><br><span style='font-size:0.85rem; opacity:0.8; margin-top:8px; display:block;'>කරුණාකර Tracking Code එක නිවැරදිදැයි පරීක්ෂා කරන්න.</span>";
+        statusMsg.style.borderColor = "var(--terracotta)";
+        statusMsg.style.color = "var(--terracotta)";
+        statusMsg.style.background = "rgba(196,113,90,0.1)";
+        showBotBubble("Oops! මට ඒ Tracking Code එක Database එකෙන් සොයාගන්න බැරි වුණා. 🧐");
+      }
+    } catch (error) {
+      console.error("Firestore loading crashed:", error);
+      statusMsg.innerHTML = "Status: <b>Connection Error ⚠️</b><br><span style='font-size:0.85rem; color:red;'>දත්ත ලබාගැනීමේදී දෝෂයක් ඇතිවිය.</span>";
+    }
+  };
+
+  initModalTriggers();
   loadDesigns();
 </script>
 
 </body>
 </html>
+
